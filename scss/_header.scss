@@ -1,0 +1,38 @@
+#page{
+    header{
+        background-color: lightgrey;
+        width: 100%;
+        display: block;
+
+        .site-title{
+            font-size: 25px;
+            line-height: 50px;
+            float: left;
+        }
+
+        nav{
+            float: right;
+
+            ul{
+                list-style: none;
+                margin: 0px;
+                padding: 0px;
+
+                li{
+                    display: inline-block;
+                    float: left;
+
+                    a{
+                        line-height: 50px;
+                        padding: 0px 10px;
+                        display: block;
+                        
+                        &:hover, &.active{
+                            background-color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

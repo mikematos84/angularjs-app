@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <a href="#/home" class="site-title">{{siteTitle}}</a>
+
+    <nav>
+        <ul>
+            <li ng-repeat="link in links"><a ui-sref="{{link.sref}}" ng-class="{active: page==link.sref}">{{link.name}}</a></li>
+        </ul>
+    </nav>
+
+    <br style="clear: both;">
+</div>
