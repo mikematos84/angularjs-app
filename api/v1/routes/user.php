@@ -1,32 +1,45 @@
-<?php 
+<?php
 
 Router::route('user', [
     'get' => function(){
-        echo json_encode([]);
+        $response = [];
+        Response::json($response);
     }
 ]);
 
 Router::route('user/(\d+)', [
     'get' => function($id){
-        echo json_encode([
-            'id' => $id
-        ]);
+        Database::query('SELECT * FROM channels', [], function($resp){
+            Response::json($resp);
+        });
+    },
+    'post' => function($id){
+        //Database::query('INSERT INTO channels (name, active) VALUES (?,?)', ['Mike',1], function($resp){
+        //    Response::json($resp);
+        //});
+
+        $db = Database::connect();
+        $stmt = $db->Prepare('INSERT INTO channels (name, active) VALUES (?,?)');
+        $response = $db->Execute($stmt, ['Mike',1]);
+        $response->insertID = $db->Insert_ID();
+        Response::json($response);
+        $db->Close();
     }
 ]);
 
 Router::route('user/(\w+)/(\d+)', [
     'get' => function($action, $id){
-        echo json_encode([
-            'action' => $action,
-            'id' => $id
-        ]);
+        $response = [];
+        $response['action'] = $action;
+        $response['id'] = $action;
+        Response::json($response);
     }
 ]);
 
 Router::route('user/([\w+\W+]*)', [
     'get' => function($post){
-        echo json_encode([
-            'post' => $post
-        ]);
+        $response = [];
+        $response['post'] = $post;
+        Response::json($response);
     }
 ]);
