@@ -1,3 +1,31 @@
 <div class="wrapper">
-    {{ content }}
+    <div class="row">
+        {{content}}
+
+        <!--<div>{{list1}}</div>
+        <div>{{list2}}</div>-->
+
+        <div class="column left">
+            <span class="drag-item" ng-repeat="item in list1 track by $index" ng-show="item.name" 
+                data-drag="true" 
+                ng-model="list1" 
+                jqyoui-draggable="{index: {{$index}}, placeholder: 'keep'}"
+                data-action="{{item}}">
+                {{item.name}}
+            </span>
+        </div>
+
+        <div class="column right drop-zone" data-drop="true" ng-model='list2' 
+        jqyoui-droppable="{multiple:true, beforeDrop: 'promptDrop', onDrop:'dropConfirmed'}">
+            <span class="drag-item" ng-repeat="item in list2 track by $index" ng-show="item.name" 
+                data-drag="true" 
+                ng-model="list2" 
+                jqyoui-draggable="{index: {{$index}}, animate:false}">
+                    {{item.name}}
+                    <span class="remove" ng-click="remove($index);">X</span>
+                </span>
+        </div>
+
+    </div>
+
 </div>
