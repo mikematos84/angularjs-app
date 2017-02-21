@@ -1,17 +1,21 @@
 <?php
 
+/**
+* Router
+* 
+* Takes in the request, parses it, and validates it against predefined routes found in the
+* "routes" folder. If a match is made, the requested endpoint's functionality is carried out
+* and any necessary variables are passed along the way.
+*
+* any digit = (\d+)
+* any word = (\w+)
+* any mixture of words, decimals, hyphens, and underscores = ([\w+\W+]*)
+*/
 
 class Router {
 	
-    /*
-        any digit = (\d+)
-        any word = (\w+)
-        any mixture of words, decimals, hyphens, and underscores = ([\w+\W+]*)
-    */
-
-	private static $routes = array();
-    
-	private function __construct() {}
+    private static $routes = array();
+    private function __construct() {}
     private function __clone() {}
 
     public static function init(){
@@ -71,6 +75,6 @@ class Router {
             $response['message'] = $message;
         }
 
-        echo json_encode($response);
+        Response::json($response);
     }
 }
