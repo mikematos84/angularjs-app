@@ -1,5 +1,11 @@
 <?php 
 
+/**
+* Response Class
+* 
+* Sets the proper response type of the API
+**/
+
 class Response{
 
     public static function sendHeaders(){

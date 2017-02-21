@@ -1,5 +1,11 @@
 <?php 
 
+/**
+* Database Helper Class
+* 
+* Middleman between ADOdb and the application
+**/ 
+
 class Database{
 
     private static $db = null;
