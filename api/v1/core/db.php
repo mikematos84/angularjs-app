@@ -51,10 +51,11 @@ class Database{
         $stmt = self::$db->Prepare($sql);
         $response = self::$db->{$action}($stmt, $vars);
 
+        if(self::$db->Insert_ID() > 0){
+            $response->insertID = self::$db->Insert_ID();
+        }
+
         if($callback != null){
-            if(self::$db->Insert_ID()){
-                $response->insertID = self::$db->Insert_ID();
-            }
             $callback($response);
         }
 
