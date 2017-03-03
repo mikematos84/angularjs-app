@@ -9,7 +9,7 @@ Router::route('user', [
 
 Router::route('user/(\d+)', [
     'get' => function($id){
-        Database::query('SELECT * FROM users', [], function($resp){
+        Database::query('SELECT * FROM users WHERE id=?', [$id], function($resp){
             Response::json($resp);
         });
     },
