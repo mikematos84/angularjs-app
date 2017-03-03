@@ -16,10 +16,12 @@ var app = angular.module(appName, [
  * Route the user to the appropriate template and controller
  */
 app.config(
-    ['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider){
+    ['$stateProvider', '$urlRouterProvider', '$locationProvider'
+    ,function($stateProvider, $urlRouterProvider, $locationProvider){
 
     //$urlRouterProvider.otherwise('/home');
+
+    $locationProvider.html5Mode(true);
     
     $stateProvider
         .state('home', {
@@ -53,7 +55,7 @@ app.config(
  * Run App
  */
 app.run(function($rootScope, $location, $document, $state){
-    
+
     $rootScope.links = [
         {name: 'Home', sref: 'home'},
         {name: 'Resume', sref: 'resume'},
