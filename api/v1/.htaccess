@@ -1,0 +1,15 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # remove trailing slash from URLs
+    RewriteBase /angular-app/api/v1/
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ $1 [R=301,L]
+
+    # Rewrite to url to redirect all API requests to api.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ core/api.php?route=$1 [QSA,NC,L]
+</IfModule>
