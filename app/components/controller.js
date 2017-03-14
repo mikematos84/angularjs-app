@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('HomeController', ['$scope', function($scope){
+.controller('MainController', ['$scope', function($scope){
 
     var self = this;
 
