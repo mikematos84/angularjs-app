@@ -1,7 +1,6 @@
 angular.module('app', [
     'ui.router',
-    'ngMaterial',
-    'ngDragDrop'
+    'ngMaterial'
 ])
 
 /** 
@@ -10,8 +9,6 @@ angular.module('app', [
 .config(
     ['$stateProvider', '$urlRouterProvider', '$locationProvider'
     ,function($stateProvider, $urlRouterProvider, $locationProvider){
-
-    //$urlRouterProvider.otherwise('/home');
 
     $locationProvider.html5Mode(true);
     
