@@ -1,6 +1,6 @@
 {
-    "name": "adodb-endpoint",
-    "description": "Simple endpoint using ADOdb and PHP",
+    "name": "adodb-php-endpoint",
+    "description": "simple adodb-php endpoint system for GET, PUT, DELETE, and UPDATE endpoints",
     "require": {
         "adodb/adodb-php": "^5.20"
     }
