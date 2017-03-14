@@ -1,21 +1,13 @@
-/**
- * Declare app constants and variables
- */
-const appName = 'angular-app';
-
-/**
- * Configure app injects
- */
-var app = angular.module(appName, [
+angular.module('app', [
     'ui.router',
     'ngMaterial',
     'ngDragDrop'
-]);
+])
 
 /** 
  * Route the user to the appropriate template and controller
  */
-app.config(
+.config(
     ['$stateProvider', '$urlRouterProvider', '$locationProvider'
     ,function($stateProvider, $urlRouterProvider, $locationProvider){
 
@@ -27,40 +19,38 @@ app.config(
         .state('home', {
             url: '/home',
             templateUrl: 'app/components/home/index.html',
-            controller: 'home.controller',
+            controller: 'HomeController',
+            controllerAs: 'home',
             authorization: false
         })
-        .state('resume', {
-            url: '/resume',
-            templateUrl: 'app/components/resume/index.html',
-            controller: 'resume.controller',
+        .state('about', {
+            url: '/about',
+            templateUrl: 'app/components/about/index.html',
+            controller: 'AboutController',
+            controllerAs: 'about',
             authorization: false
         })
         .state('contact', {
             url: '/contact',
             templateUrl: 'app/components/contact/index.html',
-            controller: 'contact.controller',
+            controller: 'ContactController',
+            controllerAs: 'contact',
             authorization: false
         })
         .state('404', {
             url: '/404',
             templateUrl: 'app/components/error/404/index.html',
-            controller: 'error.404.controller',
+            controller: 'Error404Controller',
+            controllerAs: 'error404',
             authorization: false
         })
-}]);
+}])
 
 
 /**
  * Run App
  */
-app.run(function($rootScope, $location, $document, $state){
-
-    $rootScope.links = [
-        {name: 'Home', sref: 'home'},
-        {name: 'Resume', sref: 'resume'},
-        {name: 'Contact', sref: 'contact'}
-    ];
+.run(function($rootScope, $location, $document, $state){
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) { 
         var state = $location.path().substr(1);
@@ -98,13 +88,4 @@ app.run(function($rootScope, $location, $document, $state){
         $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
     });
 
-});
-
-
-/**
- * Main Controller
- */
-
-app.controller('main.controller', ['$scope', function($scope){
-
-}]);
+})
