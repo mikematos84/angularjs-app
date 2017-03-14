@@ -1,0 +1,92 @@
+/*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4; }
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; }
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle; }
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+textarea {
+  resize: vertical; }
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+/** Global */
+.wrapper {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto; }
+
+a {
+  text-decoration: none;
+  color: black; }
+
+#page header {
+  background-color: lightgrey;
+  width: 100%;
+  display: block; }
+  #page header .site-title {
+    font-size: 25px;
+    line-height: 50px;
+    float: left; }
+  #page header nav {
+    float: right; }
+    #page header nav ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px; }
+      #page header nav ul li {
+        display: inline-block;
+        float: left; }
+        #page header nav ul li a {
+          line-height: 50px;
+          padding: 0px 10px;
+          display: block; }
+          #page header nav ul li a:hover, #page header nav ul li a.active {
+            background-color: white; }
+
+#page main .drag-item {
+  background-color: lightgreen;
+  padding: 10px 20px;
+  border-radius: 3px;
+  margin: 5px;
+  display: inline-block;
+  cursor: pointer; }
+#page main .drop-zone {
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 100%;
+  height: 200px; }
+
+/*# sourceMappingURL=style.css.map */

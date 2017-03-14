@@ -1,0 +1,17 @@
+@import 'reset';
+
+/** Global */
+.wrapper{
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+@import 'header';
+@import 'main';
+@import 'footer';
