@@ -1,4 +1,6 @@
 {
+    "name": "adodb-endpoint",
+    "description": "Simple endpoint using ADOdb and PHP",
     "require": {
         "adodb/adodb-php": "^5.20"
     }
