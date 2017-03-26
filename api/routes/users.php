@@ -1,5 +1,12 @@
 <?php 
 
+$router->before('GET|POST', '.*', function(){
+    if(!isset($_SESSION['user'])){
+        Response::json(['redirect' => 'login']);
+        exit();
+    }
+});
+
 $router->get('/users', function(){
     global $db;
     $stmt = $db->prepare('SELECT * FROM users');

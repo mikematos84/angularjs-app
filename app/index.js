@@ -7,10 +7,26 @@ angular.module('app', [
  * Route the user to the appropriate template and controller
  */
 .config(
-    ['$stateProvider', '$urlRouterProvider', '$locationProvider'
-    ,function($stateProvider, $urlRouterProvider, $locationProvider){
+    ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$windowProvider'
+    ,function($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider){
+    
+    $locationProvider.html5Mode({
+        enabled: true
+    });
 
-    $locationProvider.html5Mode(true);
+    /**
+     * If html5Mode is enabled, this section will ensure that you have a 
+     * <base> tag within you index page with the correct location. This is 
+     * a necessary feature to run html5 mode correctly in either a rooted
+     * or sub folder maner
+     */
+    var $window = $windowProvider.$get();
+    var parts = $window.location.pathname.split('/');
+    parts.shift();
+    parts[parts.length-1] = 'index.html';
+    var base = document.createElement('base');
+    base.href = '/' + parts.join('/');
+    document.getElementsByTagName('head')[0].appendChild(base);
     
     $stateProvider
         .state('home', {
@@ -47,7 +63,7 @@ angular.module('app', [
 /**
  * Run App
  */
-.run(function($rootScope, $location, $document, $state){
+.run(function($rootScope, $location, $document, $state, $http, $q){
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) { 
         var state = $location.path().substr(1);
@@ -69,7 +85,7 @@ angular.module('app', [
         }else{
             if(stateObject.authorization == true){
                 event.preventDefault();
-                $state.go('home');
+                $state.go('login');
                 return;
             }else{
                 $state.go(state);
@@ -77,12 +93,41 @@ angular.module('app', [
         }
     });
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        $rootScope.page =  toState.url.substr(toState.url.indexOf('/') + 1);
+    function ifAuthorized(required){
+        var deferred  = $q.defer();
 
+        /*$http.get('/api')
+        .then(function(resp){
+            console.log(resp);
+        }, function(err){
+            console.log(err);
+        });*/
+
+        if(required == true){
+            deferred.resolve();
+        }else{
+            deferred.resolve();
+        }
+
+        return deferred.promise;
+    }
+    
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        ifAuthorized(toState.authorization);
+        $rootScope.page =  toState.url.substr(toState.url.indexOf('/') + 1);
         $rootScope.siteTitle = 'Angular-App';
         $rootScope.tagLine = 'Test';
         $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
     });
 
 })
+
+
+/**
+ * Main Controller
+ */
+.controller('MainController', ['$scope', function($scope){
+
+    var self = this;
+
+}])
