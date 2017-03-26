@@ -4,9 +4,18 @@
 
         <nav>
             <ul>
-                <li><a ui-sref="home" ng-class="{active: page=='home'}">Home</a></li>
-                <li><a ui-sref="about" ng-class="{active: page=='about'}">About</a></li>
-                <li><a ui-sref="contact" ng-class="{active: page=='contact'}">Contact</a></li>
+                <li><a ui-sref="home" ng-class="{active: page=='home'}" title="Home">
+                    <i class="material-icons">home</i>
+                    <span class="text">Home</span>
+                </a></li>
+                <li><a ui-sref="about" ng-class="{active: page=='about'}" title="About">
+                    <i class="material-icons">format_align_justify</i>
+                    <span class="text">About</span>
+                </a></li>
+                <li><a ui-sref="contact" ng-class="{active: page=='contact'}" title="Contact">
+                    <i class="material-icons">perm_contact_calendar</i>
+                    <span class="text">Contact</span>
+                </a></li>
             </ul>
         </nav>
 

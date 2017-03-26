@@ -30,6 +30,25 @@
                         &:hover, &.active{
                             background-color: white;
                         }
+
+                        .text{
+                            display: block;
+                        }
+
+                        .material-icons{
+                            position: relative;
+                            top: 6px;
+                            display: none;
+                        }
+
+                        @media only screen and (max-width : 480px) {
+                            .text{
+                                display: none;
+                            }
+                            .material-icons{
+                                display: inline-block;
+                            }
+                        }
                     }
                 }
             }
