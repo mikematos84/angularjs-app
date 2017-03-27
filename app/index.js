@@ -3,12 +3,14 @@ angular.module('app', [
     'ngMaterial'
 ])
 
+.constant('API', {
+    url: null
+})
+
 /** 
  * Route the user to the appropriate template and controller
  */
-.config(
-    ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$windowProvider'
-    ,function($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider){
+.config(function($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider, API){
     
     $locationProvider.html5Mode({
         enabled: true
@@ -26,6 +28,7 @@ angular.module('app', [
     parts[parts.length-1] = 'index.html';
     var base = document.createElement('base');
     base.href = '/' + parts.join('/');
+    API.url = base.href.replace('/index.html', '');
     document.getElementsByTagName('head')[0].appendChild(base);
     
     $stateProvider
@@ -57,7 +60,7 @@ angular.module('app', [
             controllerAs: 'error404',
             authorization: false
         })
-}])
+})
 
 
 /**
@@ -126,8 +129,8 @@ angular.module('app', [
 /**
  * Main Controller
  */
-.controller('MainController', ['$scope', function($scope){
+.controller('MainController', function($scope, API){
 
     var self = this;
 
-}])
+})

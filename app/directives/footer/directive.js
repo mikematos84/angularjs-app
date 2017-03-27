@@ -8,6 +8,6 @@ angular.module('app')
         controllerAs: 'footer'
     }
 })
-.controller('FooterController', ['$scope', function($scope){
+.controller('FooterController', function($scope){
 
-}])
+})
