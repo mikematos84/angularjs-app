@@ -4,11 +4,18 @@
 
         <nav>
             <ul>
-                <li ng-repeat="link in links">
-                    <a ui-sref="{{link.sref}}" 
-                        ng-show="link.published"
-                        ng-class="{active: page==link.sref}">{{link.name}}</a>
-                </li>
+                <li><a ui-sref="home" ng-class="{active: page=='home'}" title="Home">
+                    <i class="material-icons">home</i>
+                    <span class="text">Home</span>
+                </a></li>
+                <li><a ui-sref="about" ng-class="{active: page=='about'}" title="About">
+                    <i class="material-icons">format_align_justify</i>
+                    <span class="text">About</span>
+                </a></li>
+                <li><a ui-sref="contact" ng-class="{active: page=='contact'}" title="Contact">
+                    <i class="material-icons">perm_contact_calendar</i>
+                    <span class="text">Contact</span>
+                </a></li>
             </ul>
         </nav>
 

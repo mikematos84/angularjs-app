@@ -1,0 +1,8 @@
+{
+    "require": {
+        "bramus/router": "^1.1",
+        "adodb/adodb-php": "^5.20",
+        "lcobucci/jwt": "^3.2",
+        "firebase/php-jwt": "^4.0"
+    }
+}
