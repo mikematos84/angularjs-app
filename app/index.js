@@ -66,7 +66,7 @@ angular.module('app', [
 /**
  * Run App
  */
-.run(function($rootScope, $location, $document, $state, $http, $q){
+.run(function($rootScope, $location, $document, $state, $http, $q, API){
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) { 
         var state = $location.path().substr(1);
@@ -99,12 +99,12 @@ angular.module('app', [
     function ifAuthorized(required){
         var deferred  = $q.defer();
 
-        /*$http.get('/api')
+        $http.get(API.url + '/api')
         .then(function(resp){
             console.log(resp);
         }, function(err){
             console.log(err);
-        });*/
+        });
 
         if(required == true){
             deferred.resolve();
@@ -130,7 +130,5 @@ angular.module('app', [
  * Main Controller
  */
 .controller('MainController', function($scope, API){
-
     var self = this;
-
 })
