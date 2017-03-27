@@ -99,13 +99,6 @@ angular.module('app', [
     function ifAuthorized(required){
         var deferred  = $q.defer();
 
-        $http.get(API.url + '/api')
-        .then(function(resp){
-            console.log(resp);
-        }, function(err){
-            console.log(err);
-        });
-
         if(required == true){
             deferred.resolve();
         }else{
