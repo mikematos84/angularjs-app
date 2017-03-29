@@ -7,4 +7,4 @@
 ## Before running application
 ### NPM
 * Install NPM if you don't already have it installed.
-* run "npm install" to install dependencies.
+* run "npm install" from the project's root directory to install dependencies.
