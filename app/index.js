@@ -21,18 +21,6 @@ angular.module('app', [
             controller: 'HomeController',
             controllerAs: 'home',
         })
-        .state('about', {
-            url: '/about',
-            templateUrl: 'app/components/about/index.html',
-            controller: 'AboutController',
-            controllerAs: 'about',
-        })
-        .state('contact', {
-            url: '/contact',
-            templateUrl: 'app/components/contact/index.html',
-            controller: 'ContactController',
-            controllerAs: 'contact',
-        })
         .state('404', {
             url: '/404',
             templateUrl: 'app/components/error/404/index.html',
