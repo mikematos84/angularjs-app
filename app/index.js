@@ -54,8 +54,8 @@ angular.module('app', [
 /**
  * Run App
  */
-.run(function($rootScope, $location, $document, $state, $http, $q, API){
-
+.run(function($rootScope, $document, $state){
+    
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         $rootScope.page =  toState.url.substr(toState.url.indexOf('/') + 1);
         $rootScope.siteTitle = 'Angular-App';
