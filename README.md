@@ -8,8 +8,3 @@
 ### NPM
 * Install NPM if you don't already have it installed.
 * run "npm install" to install dependencies.
-
-### Composer
-* Install Composer if you don't already have it installed.
-* navigate to /api folder.
-* run "composer install" to install dependencies.
