@@ -1,6 +1,6 @@
 angular.module('app')
 .controller('HomeController',
-function($scope){
+function($scope, $stateParams){
 
     var self = this;
 
