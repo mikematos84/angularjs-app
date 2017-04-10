@@ -21,18 +21,6 @@ angular.module('app', [
             controller: 'HomeController',
             controllerAs: 'home',
         })
-        .state('about', {
-            url: '/about',
-            templateUrl: 'app/components/about/index.html',
-            controller: 'AboutController',
-            controllerAs: 'about',
-        })
-        .state('contact', {
-            url: '/contact',
-            templateUrl: 'app/components/contact/index.html',
-            controller: 'ContactController',
-            controllerAs: 'contact',
-        })
         .state('404', {
             url: '/404',
             templateUrl: 'app/components/error/404/index.html',
@@ -66,8 +54,8 @@ angular.module('app', [
 /**
  * Run App
  */
-.run(function($rootScope, $location, $document, $state, $http, $q, API){
-
+.run(function($rootScope, $document, $state){
+    
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         $rootScope.page =  toState.url.substr(toState.url.indexOf('/') + 1);
         $rootScope.siteTitle = 'Angular-App';
