@@ -4,12 +4,8 @@
 * Scaffolding for a basic Angular single page app.
 * This app is ment to run on an existing web server such as Apache, NGINX, or IIS.
 
-## Before running application
-### NPM
-* Install NPM if you don't already have it installed.
-* run "npm install" to install dependencies.
+### Requirements
+* <a href="https://www.npmjs.com/" target="_blank">NPM - Node Package Manager</a>
 
-### Composer
-* Install Composer if you don't already have it installed.
-* navigate to /api folder.
-* run "composer install" to install dependencies.
+## Before running application
+* run "npm install" from the project's root directory to install dependencies.
