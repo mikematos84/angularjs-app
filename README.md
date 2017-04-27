@@ -11,5 +11,5 @@
 * run "npm install" from the project's root directory to install dependencies.
 
 ## Running with Gulp
-* run "gulp dev" to run the project in development mode (Uncompressed)
-* run "gulp prod" to run the project in production mode (Compressed)
+* run "gulp" to build the project in development mode (Uncompressed)
+* run "gulp build" to build the project in production mode (Compressed)
