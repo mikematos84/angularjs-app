@@ -15,18 +15,21 @@ angular.module('app', [
     $locationProvider.html5Mode(true).hashPrefix('!');
     
     $stateProvider
-        .state('home', {
-            url: '/home',
-            templateUrl: './components/home/index.html',
-            controller: 'HomeController',
-            controllerAs: 'home',
-        })
         .state('404', {
             url: '/404',
             templateUrl: './components/error/404/index.html',
-            controller: 'Error404Controller',
-            controllerAs: 'error404',
+            controller: 'Error404Controller'
         })
+        .state('home', {
+            url: '/home',
+            templateUrl: './components/home/index.html',
+            controller: 'HomeController'
+        })
+        .state('resume', {
+            url: '/resume',
+            templateUrl: './components/resume/index.html',
+            controller: 'ResumeController'
+        });
 
     
         $urlRouterProvider
@@ -63,4 +66,4 @@ angular.module('app', [
         $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
     });
 
-})
+});

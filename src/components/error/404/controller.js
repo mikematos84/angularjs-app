@@ -1,7 +1,8 @@
 angular.module('app')
-.controller('Error404Controller',
-function($scope){
+.controller('Error404Controller'
+,['$scope'
+,function($scope){
 
     $scope.content = "Error 404";
 
-})
+}]);

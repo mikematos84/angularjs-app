@@ -6,8 +6,10 @@ angular.module('app')
         templateUrl: './directives/header/index.html',
         controller: 'HeaderController',
         controllerAs: 'header'
-    }
+    };
 })
-.controller('HeaderController', function($scope){
+.controller('HeaderController'
+,['$scope', 
+function($scope){
 
-})
+}]);
