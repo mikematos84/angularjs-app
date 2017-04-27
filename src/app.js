@@ -24,6 +24,11 @@ angular.module('app', [
             url: '/home',
             templateUrl: './components/home/index.html',
             controller: 'HomeController'
+        })
+        .state('resume', {
+            url: '/resume',
+            templateUrl: './components/home/index.html',
+            controller: 'HomeController'
         });
 
     
