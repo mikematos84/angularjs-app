@@ -17,13 +17,13 @@ angular.module('app', [
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: 'app/components/home/index.html',
+            templateUrl: './components/home/index.html',
             controller: 'HomeController',
             controllerAs: 'home',
         })
         .state('404', {
             url: '/404',
-            templateUrl: 'app/components/error/404/index.html',
+            templateUrl: './components/error/404/index.html',
             controller: 'Error404Controller',
             controllerAs: 'error404',
         })
@@ -63,12 +63,4 @@ angular.module('app', [
         $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
     });
 
-})
-
-
-/**
- * Main Controller
- */
-.controller('MainController', function($scope, API){
-    var self = this;
 })
