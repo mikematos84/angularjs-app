@@ -4,5 +4,5 @@
     "./node_modules/jquery-ui-npm/jquery-ui.css",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
     "./src/css/**/*.css",
-    "./src/scss/**/*.scss"
+    "!./src/css/**/*.css"
 ]
