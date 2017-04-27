@@ -114,7 +114,6 @@ gulp.task('watch', function(){
 gulp.task('browser-sync', function(){
     return browserSync.init(null, {
         open: false,
-        port: 2684,
         server: {
             baseDir: paths.dest,
             middleware: [history()]
