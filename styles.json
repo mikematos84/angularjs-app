@@ -2,6 +2,7 @@
     "./css/normalize.css",
     "./node_modules/angular-material/angular-material.css",
     "./node_modules/jquery-ui-npm/jquery-ui.css",
+    "./node_modules/md-icons/material-icons.css?family=Material+Icons",
     "./src/css/**/*.css",
     "!./src/css/**/*.min.css"
 ]

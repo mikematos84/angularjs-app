@@ -94,7 +94,7 @@ gulp.task('build', ['clean'], function(){
         console.log(' -------------------------------------');
         if(devMode === true){
             console.log(' * Least Efficient');
-            console.log(' * Uncompress files');
+            console.log(' * Uncompressed files');
             console.log(' * Longer load times');
         }else{
             console.log(' * Most Efficient');
@@ -114,6 +114,7 @@ gulp.task('watch', function(){
 gulp.task('browser-sync', function(){
     return browserSync.init(null, {
         open: false,
+        port: 2684,
         server: {
             baseDir: paths.dest,
             middleware: [history()]
