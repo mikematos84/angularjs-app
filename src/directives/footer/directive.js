@@ -3,7 +3,7 @@ angular.module('app')
     return {
         restrict: 'A',
         replace: true,
-        templateUrl: 'app/directives/footer/index.html',
+        templateUrl: './directives/footer/index.html',
         controller: 'FooterController',
         controllerAs: 'footer'
     }

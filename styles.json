@@ -1,0 +1,8 @@
+[
+    "./css/normalize.css",
+    "./node_modules/angular-material/angular-material.css",
+    "./node_modules/jquery-ui-npm/jquery-ui.css",
+    "https://fonts.googleapis.com/icon?family=Material+Icons",
+    "./src/css/**/*.css",
+    "./src/scss/**/*.scss"
+]

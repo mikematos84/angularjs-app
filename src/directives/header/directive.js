@@ -3,7 +3,7 @@ angular.module('app')
     return {
         restrict: 'A',
         replace: true,
-        templateUrl: 'app/directives/header/index.html',
+        templateUrl: './directives/header/index.html',
         controller: 'HeaderController',
         controllerAs: 'header'
     }
