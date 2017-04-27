@@ -79,7 +79,7 @@ gulp.task('images', function(){
 })
 
 gulp.task('copy', function(){
-    return gulp.src('./src/*.+(htaccess|config|xml|png|ico)')
+    return gulp.src(['./src/*.+(config|xml|png|ico)','./src/.*+(htaccess)'])
     .pipe(gulp.dest(paths.dest));
 })
 
