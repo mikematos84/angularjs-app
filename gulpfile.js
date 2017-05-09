@@ -5,7 +5,6 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     jshint = require('gulp-jshint'),
     imagemin = require('gulp-imagemin'),
-    htmlmin = require('gulp-htmlmin'),
     rename = require('gulp-rename');
 
 var history = require('connect-history-api-fallback'),
