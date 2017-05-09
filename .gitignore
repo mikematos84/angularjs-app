@@ -31,8 +31,8 @@ build/Release
 node_modules
 jspm_packages
 .vscode
-dist
-test
+#dist
+#test
 
 #SASS cache directory
 .sass-cache
