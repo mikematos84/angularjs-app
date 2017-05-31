@@ -1,16 +1,5 @@
 @import 'reset';
-
-.wrapper{
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-a{
-    text-decoration: none;
-    color: black;
-}
-
+@import 'global';
 @import 'header';
 @import 'main';
 @import 'footer';

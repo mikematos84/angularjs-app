@@ -6,134 +6,208 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    inject = require('gulp-inject'),
+    htmlreplace = require('gulp-html-replace'),
+    gzip = require('gulp-gzip')
+    gulpMerge = require('gulp-merge');
 
 var history = require('connect-history-api-fallback'),
     merge = require('merge-stream'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence').use(gulp),
+    argv = require('yargs').argv,
+    es = require('event-stream');
 
 var scripts = require('./scripts'),
     styles = require('./styles');
 
-var devMode = false,
-    src = './src'
-paths = {
-    get dest() { return devMode ? './test' : './dist'; },
-    get css() { return this.dest + '/css'; },
-    get js() { return this.dest + '/js'; },
-    get images() { return this.dest + '/img'; }
-};
+var isProduction = (argv.production !== undefined) ? true : false,
+    src = './src',
+    dest = isProduction ? './dist' : './test';
 
-gulp.task('vendor', function () {
-    return merge(
-        gulp.src(styles)
-            .pipe(concat('vendor.css'))
-            .pipe(autoprefixer({
-                browsers: [
-                    'last 2 versions',
-                    'ie 9'
-                ],
-                cascade: true
-            }))
-            .pipe(sass({ outputStyle: devMode === false ? 'compressed' : 'expanded' }).on('error', sass.logError))
-            .pipe(gulp.dest(paths.css)),
-        gulp.src(scripts)
-            .pipe(concat('vendor.js'))
-            .pipe(gulpif(devMode === false, uglify({ mangle: false })))
-            .pipe(gulp.dest(paths.js))
-    )
-});
+var paths = {
+    css: dest + '/css',
+    js: dest + '/js',
+    images: dest + '/images'
+}
 
-gulp.task('scss', function () {
-    return gulp.src('./src/scss/**/*.scss')
-        .pipe(concat('main.css'))
+gulp.task('vendor-styles', function () {
+    var stream = gulp.src(styles)
+        .pipe(concat('vendor.css'))
         .pipe(autoprefixer({
             browsers: [
                 'last 2 versions',
                 'ie 9'
             ],
             cascade: true
-        }))
-        .pipe(sass({ outputStyle: devMode === false ? 'compressed' : 'expanded' }).on('error', sass.logError))
-        .pipe(gulp.dest(paths.css))
-        .pipe(browserSync.reload({ stream: true }));
+        }));
+
+    if (isProduction === false) {
+        stream
+            .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+            .pipe(gulp.dest(paths.css));
+    } else {
+        stream
+            .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+            .pipe(gulp.dest(paths.css));
+    }
+
+    return stream;
+})
+
+gulp.task('vendor-scripts', function () {
+    var stream = gulp.src(scripts)
+        .pipe(concat('vendor.js'));
+
+    if (isProduction) {
+        stream
+            .pipe(uglify({ mangle: false }));
+    }
+
+    stream
+        .pipe(gulp.dest(dest + '/js'));
+
+    return stream;
+})
+
+gulp.task('scss', function () {
+    var stream = gulpMerge(
+        gulp.src(styles),
+        gulp.src(src + '/scss/**/*.scss')
+    ).pipe(concat('styles.css'))
+    .pipe(autoprefixer({
+        browsers: [
+            'last 2 versions',
+            'ie 9'
+        ],
+        cascade: true
+    }));
+
+    if (isProduction === false) {
+        stream
+            .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+            .pipe(gulp.dest(paths.css));
+    } else {
+        stream
+            .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+            .pipe(gulp.dest(paths.css));
+    }
+
+    stream
+        .pipe(browserSync.stream());
+
+    return stream;
 });
 
 gulp.task('js', function () {
-    return gulp.src('./src/**/*.js')
-        .pipe(jshint({ laxcomma: true }))
-        .pipe(jshint.reporter('default'))
-        .pipe(concat('main.js'))
-        .pipe(gulpif(devMode === false, uglify({ mangle: false })))
-        .pipe(gulp.dest(paths.js))
-        .pipe(browserSync.reload({ stream: true }));
-});
+    var stream = gulpMerge(
+        gulp.src(scripts),
+        gulp.src(src + '/**/*.js')
+            .pipe(jshint({ laxcomma: true }))
+            .pipe(jshint.reporter('default'))
+    ).pipe(jshint({ laxcomma: true }))
+        .pipe(concat('bundle.js'));
 
-gulp.task('html', function () {
-    return gulp.src('./src/**/*.html')
-        .pipe(gulp.dest(paths.dest))
-        .pipe(browserSync.reload({ stream: true }));
+    if (isProduction) {
+        stream
+            .pipe(uglify({ mangle: false }));
+    }
+
+    stream
+        .pipe(gulp.dest(paths.js))
+        .pipe(browserSync.stream());
+
+    return stream;
 });
 
 gulp.task('images', function () {
-    return gulp.src('./src/img/**/*.+(png|jpg|gif|svg)')
-        .pipe(gulpif(devMode === false, imagemin([
-            imagemin.gifsicle({ interlaced: true }),
-            imagemin.jpegtran({ progressive: true }),
-            imagemin.optipng({ optimizationLevel: 7 }),
-            imagemin.svgo({ plugins: [{ removeViewBox: true }] })
-        ], { verbose: true })))
-        .pipe(gulp.dest(paths.images))
+    var stream = gulp.src(src + '/img/**/*.+(png|jpg|gif|svg)');
+
+    if (isProduction) {
+        stream
+            .pipe(gulpif(isProduction === false, imagemin([
+                imagemin.gifsicle({ interlaced: true }),
+                imagemin.jpegtran({ progressive: true }),
+                imagemin.optipng({ optimizationLevel: 7 }),
+                imagemin.svgo({ plugins: [{ removeViewBox: true }] })
+            ], { verbose: true })));
+    }
+
+    stream
+        .pipe(gulp.dest(paths.images));
+
+    return stream;
 })
 
-gulp.task('copy', function () {
-    return gulp.src([
-        './src/*.+(config|xml|png|ico)',
-        './src/.*+(htaccess)'
-    ])
-        .pipe(gulp.dest(paths.dest));
+gulp.task('md-icons', function () {
+    var stream = gulp.src('./node_modules/md-icons/**/*.+(eot|svg|ttf|woff|woff2)')
+        .pipe(gulp.dest(dest + '/css'));
+
+    return stream;
+});
+
+gulp.task('assets', function () {
+    var stream = gulp.src([
+        src + '/*.+(config|xml|png|ico)',
+        src + '/.*+(htaccess)'
+    ]);
+
+    stream
+        .pipe(gulp.dest(dest));
+
+    return stream;
+})
+
+gulp.task('html', function () {
+    var stream = gulp.src([
+        src + '/**/*.html'
+    ]);
+
+    stream
+        .pipe(gulp.dest(dest))
+        .pipe(browserSync.stream());
+
+    return stream;
+});
+
+gulp.task('watch', function () {
+    browserSync.init({
+        open: false,
+        server: {
+            baseDir: dest,
+            middleware: [
+                history()
+            ]
+        },
+        watchOptions: {
+            ignoreInitial: true
+        }
+    });
+
+    gulp.watch([src + '/**/*.+(css|scss)'], ['scss']);
+    gulp.watch([src + '/**/*.js'], ['js']);
+    gulp.watch([src + '/**/*.html'], ['html']);
+    gulp.watch([src + '/**/*.+(png|jpg|gif|svg)'], ['images']);
 })
 
 gulp.task('clean', function () {
-    return del(paths.dest);
-})
-
-gulp.task('watch', function () {
-    gulp.watch(['./src/**/*.+(css|scss)'], ['css']);
-    gulp.watch(['./src/**/*.js'], ['js']);
-    gulp.watch(['./src/**/*.html'], ['html']);
-    gulp.watch(['./src/**/*.+(png|jpg|gif|svg)'], ['images'])
-})
-
-gulp.task('browser-sync', function () {
-    return browserSync.init({
-        open: false,
-        server: { baseDir: paths.dest, middleware: [history()] }
-    });
+    return del(dest);
 })
 
 gulp.task('build', ['clean'], function () {
-    runSequence(['vendor', 'scss', 'js', 'html', 'images', 'copy', 'watch'], function () {
-        console.log(' -------------------------------------');
-        console.log(' Build Type: ' + (devMode === true ? 'DEV' : 'PROD'));
-        console.log(' -------------------------------------');
-        if (devMode === true) {
-            console.log(' * Least Efficient');
-            console.log(' * Uncompressed files');
-            console.log(' * Longer load times');
-        } else {
-            console.log(' * Most Efficient');
-            console.log(' * Compressed files');
-            console.log(' * Shorter load times');
-        }
-        console.log(' -------------------------------------');
-        gulp.start('browser-sync');
+    runSequence([
+        'scss',
+        'js',
+        'images',
+        'md-icons',
+        'assets',
+        'html'
+    ], function () {
+        gulp.start('watch');
+        console.log((isProduction) ? 'Production' : 'Development' + ' Build');
     });
 });
 
-gulp.task('default', function () {
-    devMode = true;
-    gulp.start(['build']);
-});
+gulp.task('default', ['build']);
