@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     inject = require('gulp-inject'),
     htmlreplace = require('gulp-html-replace'),
     gzip = require('gulp-gzip')
-    gulpMerge = require('gulp-merge');
+gulpMerge = require('gulp-merge');
 
 var history = require('connect-history-api-fallback'),
     merge = require('merge-stream'),
@@ -77,13 +77,13 @@ gulp.task('scss', function () {
         gulp.src(styles),
         gulp.src(src + '/scss/**/*.scss')
     ).pipe(concat('styles.css'))
-    .pipe(autoprefixer({
-        browsers: [
-            'last 2 versions',
-            'ie 9'
-        ],
-        cascade: true
-    }));
+        .pipe(autoprefixer({
+            browsers: [
+                'last 2 versions',
+                'ie 9'
+            ],
+            cascade: true
+        }));
 
     if (isProduction === false) {
         stream
@@ -104,7 +104,10 @@ gulp.task('scss', function () {
 gulp.task('js', function () {
     var stream = gulpMerge(
         gulp.src(scripts),
-        gulp.src(src + '/**/*.js')
+        gulp.src([
+            src + '/**/*.js',
+            '!' + src + '/**/*.min.js'
+        ])
             .pipe(jshint({ laxcomma: true }))
             .pipe(jshint.reporter('default'))
     ).pipe(jshint({ laxcomma: true }))
