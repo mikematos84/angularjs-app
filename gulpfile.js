@@ -31,7 +31,7 @@ var paths = {
 
 var version = '1.0.0';
 
-gulp.task('scss', function () {
+gulp.task('sass', function () {
     return gulpMerge(
         gulp.src(styles),
         gulp.src([
@@ -99,8 +99,7 @@ gulp.task('assets', function () {
 
 gulp.task('html', function () {
     return gulp.src([src + '/**/*.html'])
-        .pipe(gulp.dest(dest))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest(dest));
 });
 
 gulp.task('browser-sync', function () {
@@ -116,10 +115,10 @@ gulp.task('browser-sync', function () {
 })
 
 gulp.task('watch', ['browser-sync'], function () {
-    gulp.watch([src + '/**/*.+(css|scss)'], ['scss']);
+    gulp.watch([src + '/**/*.+(css|scss)'], ['sass']);
     gulp.watch([src + '/**/*.js'], ['js']);
     gulp.watch([src + '/**/*.+(png|jpg|gif|svg)'], ['images']);
-    gulp.watch([src + '/**/*.html'], ['html']);
+    gulp.watch([src + '/**/*.html'], ['html']).on('change', browserSync.reload);
 });
 
 gulp.task('clean', function () {
@@ -140,7 +139,7 @@ gulp.task('package', function () {
 
 gulp.task('build', ['clean'], function () {
     runSequence([
-        'scss',
+        'sass',
         'js',
         'images',
         'md-icons',
