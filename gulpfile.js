@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     imagemin = require('gulp-imagemin'),
     autoprefixer = require('gulp-autoprefixer'),
-    gzip = require('gulp-gzip'),
+    zip = require('gulp-zip'),
     gulpMerge = require('gulp-merge');
 
 var history = require('connect-history-api-fallback'),
@@ -15,7 +15,8 @@ var history = require('connect-history-api-fallback'),
     runSequence = require('run-sequence').use(gulp),
     argv = require('yargs').argv;
 
-var scripts = require('./scripts'),
+var package = require('./package'),
+    scripts = require('./scripts'),
     styles = require('./styles');
 
 var isProduction = (argv.production !== undefined) ? true : false,
@@ -27,6 +28,8 @@ var paths = {
     js: dest + '/js',
     images: dest + '/img'
 };
+
+var version = '1.0.0';
 
 gulp.task('scss', function () {
     return gulpMerge(
@@ -125,6 +128,18 @@ gulp.task('watch', function () {
 gulp.task('clean', function () {
     return del(dest);
 });
+
+gulp.task('package', function () {
+    var file = package.name + '-v' + package.version + '.zip';
+    return gulp.src([
+        dest + '/**/*',
+        '!' + dest + '/**/*.zip'
+    ])
+        .pipe(zip(file))
+        .pipe(gulp.dest(dest)).on('end', function () {
+            console.log('Package created: ' + dest + '/' + file);
+        });
+})
 
 gulp.task('build', ['clean'], function () {
     runSequence([

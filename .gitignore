@@ -30,9 +30,16 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+
+#IDE specific directories
 .vscode
+
+#Build Folders
 dist
 test
+
+#Compressed files
+*.zip
 
 #SASS cache directory
 .sass-cache
