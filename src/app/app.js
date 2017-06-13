@@ -17,12 +17,12 @@ angular.module('app', [
         $stateProvider
             .state('404', {
                 url: '/404',
-                templateUrl: './components/error/404/index.html',
+                templateUrl: './app/components/error/404/index.html',
                 controller: 'Error404Controller'
             })
             .state('home', {
                 url: '/home',
-                templateUrl: './components/home/index.html',
+                templateUrl: './app/components/home/index.html',
                 controller: 'HomeController'
             });
 
