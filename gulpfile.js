@@ -36,7 +36,8 @@ gulp.task('sass', function () {
         gulp.src(styles),
         gulp.src([
             "./src/css/**/*.css",
-            "./src/scss/**/*.scss"
+            "./src/scss/**/*.scss",
+            "./src/scss/**/_*.scss"
         ])
     )
         .pipe(autoprefixer({
