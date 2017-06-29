@@ -12,9 +12,13 @@
     "jquery": "^3.2.1",
     "jquery-ui-npm": "^1.12.0",
     "md-icons": "^1.0.0",
+    "ng-smooth-scroll": "^1.7.3",
     "normalize.css": "^6.0.0",
     "npm-modernizr": "^2.8.3",
-    "run-sequence": "^1.2.2"
+    "pipwerks-scorm-api-wrapper": "^0.1.2",
+    "run-sequence": "^1.2.2",
+    "scorm": "^1.0.0",
+    "scorm-api-wrapper": "0.0.2"
   },
   "devDependencies": {
     "browser-sync": "^2.18.12",
@@ -28,6 +32,7 @@
     "gulp-jshint": "^2.0.4",
     "gulp-merge": "^0.1.1",
     "gulp-sass": "^3.1.0",
+    "gulp-scorm-manifest": "^0.6.4",
     "gulp-uglify": "^2.1.2",
     "gulp-zip": "^4.0.0",
     "jshint": "^2.9.4",

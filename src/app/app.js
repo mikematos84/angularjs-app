@@ -1,19 +1,16 @@
 angular.module('app', [
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
+    'smoothScroll'
 ])
-
-    .constant('API', {
-        url: null
-    })
 
     /** 
      * Route the user to the appropriate template and controller
      */
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider, API) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider) {
 
-        $locationProvider.html5Mode(true).hashPrefix('!');
-
+        $locationProvider.hashPrefix('!');
+        
         $stateProvider
             .state('404', {
                 url: '/404',
@@ -60,5 +57,16 @@ angular.module('app', [
             $rootScope.tagLine = 'Test';
             $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
         });
+
+        sco = pipwerks.SCORM;
+        var initialized = sco.init();
+        
+        if (initialized) {
+            var status = sco.get('cmi.core.lesson_status');
+            if (status !== 'completed') {
+                status = sco.set('cmi.core.lesson_status', 'incomplete');
+            }
+            console.log('Lesson Status: ' + status);
+        }
 
     });
