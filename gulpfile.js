@@ -38,7 +38,11 @@ gulp.task('sass', function () {
         gulp.src([
             "./src/css/**/*.css",
             "./src/scss/**/*.scss",
+<<<<<<< HEAD
             "./src/scss/**/_*.scss"
+=======
+            "!./src/scss/_*.scss"
+>>>>>>> 4493ecd086d21eb38587f7c638364d349a5f562e
         ])
     )
         .pipe(autoprefixer({
