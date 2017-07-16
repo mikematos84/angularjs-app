@@ -12,11 +12,8 @@
     "jquery": "^3.2.1",
     "jquery-ui-npm": "^1.12.0",
     "md-icons": "^1.0.0",
-<<<<<<< HEAD
     "ng-smooth-scroll": "^1.7.3",
-=======
     "node-sass": "^4.5.3",
->>>>>>> 4493ecd086d21eb38587f7c638364d349a5f562e
     "normalize.css": "^6.0.0",
     "npm-modernizr": "^2.8.3",
     "pipwerks-scorm-api-wrapper": "^0.1.2",
