@@ -7,8 +7,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     autoprefixer = require('gulp-autoprefixer'),
     zip = require('gulp-zip'),
-    gulpMerge = require('gulp-merge'),
-    manifest = require('gulp-scorm-manifest');
+    gulpMerge = require('gulp-merge');
 
 var history = require('connect-history-api-fallback'),
     browserSync = require('browser-sync').create(),
@@ -104,19 +103,6 @@ gulp.task('assets', function () {
 gulp.task('html', function () {
     return gulp.src([src + '/**/*.html'])
         .pipe(gulp.dest(dest));
-});
-
-gulp.task('manifest', function () {
-    gulp.src(src + '/**')
-        .pipe(manifest({
-            version: '1.2',
-            courseId: 'Gulp101',
-            SCOtitle: 'Intro Title',
-            moduleTitle: 'Module Title',
-            launchPage: 'index.html',
-            fileName: 'imsmanifest.xml'
-        }))
-        .pipe(gulp.dest(dest))
 });
 
 gulp.task('browser-sync', function () {
