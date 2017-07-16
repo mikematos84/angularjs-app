@@ -129,7 +129,7 @@ gulp.task('browser-sync', function () {
             ]
         }
     });
-})
+});
 
 gulp.task('watch', ['browser-sync'], function () {
     gulp.watch([src + '/**/*.+(css|scss)'], ['sass']);
@@ -161,8 +161,7 @@ gulp.task('build', ['clean'], function () {
         'images',
         'md-icons',
         'assets',
-        'html',
-        'manifest'
+        'html'
     ], function () {
         gulp.start('watch');
         console.log((isProduction) ? 'Production' : 'Development' + ' Build');

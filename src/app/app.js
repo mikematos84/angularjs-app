@@ -57,16 +57,4 @@ angular.module('app', [
             $rootScope.tagLine = 'Test';
             $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
         });
-
-        sco = pipwerks.SCORM;
-        var initialized = sco.init();
-        
-        if (initialized) {
-            var status = sco.get('cmi.core.lesson_status');
-            if (status !== 'completed') {
-                status = sco.set('cmi.core.lesson_status', 'incomplete');
-            }
-            console.log('Lesson Status: ' + status);
-        }
-
     });
