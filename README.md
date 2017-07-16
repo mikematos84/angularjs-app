@@ -12,4 +12,4 @@
 
 ## Running with Gulp
 * run "gulp" to build the project in development mode (Uncompressed)
-* run "gulp build" to build the project in production mode (Compressed)
+* run "gulp --production" to build the project in production mode (Compressed)
