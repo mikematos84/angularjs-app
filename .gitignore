@@ -38,6 +38,9 @@ jspm_packages
 dist
 test
 
+# Font Folders
+src/fonts
+
 # Compressed files
 *.zip
 

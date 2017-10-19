@@ -1,19 +1,16 @@
 angular.module('app', [
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
+    'smoothScroll'
 ])
-
-    .constant('API', {
-        url: null
-    })
 
     /** 
      * Route the user to the appropriate template and controller
      */
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider, API) {
+    .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $windowProvider) {
 
-        $locationProvider.html5Mode(true).hashPrefix('!');
-
+        $locationProvider.hashPrefix('!');
+        
         $stateProvider
             .state('404', {
                 url: '/404',
@@ -60,5 +57,4 @@ angular.module('app', [
             $rootScope.tagLine = 'Test';
             $document[0].title = $rootScope.siteTitle + ' : ' + $rootScope.page;
         });
-
     });
