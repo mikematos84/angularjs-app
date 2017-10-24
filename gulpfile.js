@@ -3,6 +3,7 @@ var gulp = require('gulp')
     , gulpif = require('gulp-if')
     , uglify = require('gulp-uglify')
     , sass = require('gulp-sass')
+    , sassImportOnce = require('gulp-sass-import-once')
     , jshint = require('gulp-jshint')
     , imagemin = require('gulp-imagemin')
     , autoprefixer = require('gulp-autoprefixer')
@@ -51,6 +52,7 @@ gulp.task('sass', function () {
             cascade: true
         }))
         .pipe(concat('styles.css'))
+        .pipe(sassImportOnce())
         .pipe(sass({
             outputStyle: isProduction ? 'compressed' : 'expanded'
         }).on('error', sass.logError))
@@ -234,11 +236,19 @@ gulp.task('install-google-md-icons', function () {
  * Preprosessing
  */
 
- gulp.task('install', function(){
-     runSequence([
-         'install-google-webfonts',
-         'install-google-md-icons'
-    ], function(){
+gulp.task('install', function () {
+    runSequence([
+        'install-google-webfonts',
+        'install-google-md-icons'
+    ], function () {
         console.log('Preprosessing Complete!');
     })
- })
+})
+
+gulp.task('uninstall', function () {
+    del([
+        src + '/fonts',
+        src + '/scss/_fonts.scss',
+        src + '/scss/_material-icons.scss'
+    ])
+})
