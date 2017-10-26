@@ -8,6 +8,7 @@
     "angular-animate": ">=1.3 <1.6",
     "angular-aria": ">=1.3 <1.6",
     "angular-material": "^1.1.3",
+    "angular-messages": "^1.5.11",
     "angular-ui-router": "^0.4.2",
     "jquery": "^3.2.1",
     "jquery-ui-npm": "^1.12.0",
@@ -17,7 +18,6 @@
     "normalize.css": "^6.0.0",
     "npm-modernizr": "^2.8.3",
     "pipwerks-scorm-api-wrapper": "^0.1.2",
-    "run-sequence": "^1.2.2",
     "scorm": "^1.0.0",
     "scorm-api-wrapper": "0.0.2"
   },
@@ -33,6 +33,7 @@
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.2.0",
     "gulp-jshint": "^2.0.4",
+    "gulp-json-minify": "^1.2.0",
     "gulp-merge": "^0.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
@@ -41,7 +42,7 @@
     "gulp-zip": "^4.0.0",
     "jshint": "^2.9.4",
     "merge-stream": "^1.0.1",
-    "run-sequence": "^1.2.2",
+    "run-sequence": "^2.2.0",
     "yargs": "^8.0.1"
   },
   "scripts": {
