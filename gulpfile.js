@@ -84,7 +84,7 @@ gulp.task('js', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('json', function(){
+gulp.task('json', function () {
     return gulp.src(src + '/data/**/*.json')
         .pipe(jsonMinify())
         .pipe(gulp.dest(dest + '/data'))
