@@ -9,5 +9,6 @@
     "./node_modules/angular-material/angular-material.js",
     "./node_modules/angular-messages/angular-messages.js",
     "./node_modules/ng-smooth-scroll/lib/angular-smooth-scroll.js",
+    "./node_modules/lodash/lodash.js",
     "./src/js/**/*.js"
 ]
